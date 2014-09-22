@@ -6,34 +6,41 @@ module.exports = function (grunt) {
   'use strict';
 
   function iterate (translations, options) {
-    var result = {};
-    translations.forEach(function (translation, key) {
-      if (_.isString) {
+    var isArray = _.isArray(translations);
+    var result = isArray ? [] : {};
+
+    _.each(translations, function (translation, key) {
+
+      if (isArray && _.isString(translation)) {
+        result.push(MarkdownParser.parse(translation, options));
+      }
+      else if (_.isString(translation)) {
         result[key] = MarkdownParser.parse(translation, options);
       }
       else {
-        result[key] = iterate(translation, options);
+        if (isArray) {
+          result.push(iterate(translation, options))
+        }
+        else {
+          result[key] = iterate(translation, options);
+        }
       }
     });
 
     return result;
-  };
-
-  console.log('MARKDOWN-TRANSLATE');
+  }
 
   grunt.registerMultiTask(
-    'markdown-translate',
+    'grunt-markdown-translate',
     'Grunt plugin for processing translation files and parse any markdown included.',
 
     function() {
-      var renderer = new TemplateRenderer();
-
       var options = this.options({});
 
       this.files.forEach(function(file) {
         var translations = grunt.file.readJSON(file.src);
         var result = iterate(translations, options);
-        grunt.file.write(file.dest, result);
+        grunt.file.write(file.dest, JSON.stringify(result));
       });
     }
   );

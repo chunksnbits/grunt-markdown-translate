@@ -2,7 +2,11 @@
   "name": "grunt-markdown-translate",
   "version": "0.0.1",
   "description": "Grunt plugin for processing translation files and parse any markdown included.",
-  "main": "index.js",
+  "files": [
+    "tasks/",
+    "LICENSE"
+  ],
+  "main": "tasks/translate.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +27,7 @@
   },
   "homepage": "https://github.com/chunksnbits/grunt-markdown-translate",
   "dependencies": {
+    "flatnest": "^0.2.2",
     "lodash": "^2.4.1",
     "node-markup-markdown": "0.0.1"
   }
