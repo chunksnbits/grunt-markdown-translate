@@ -1,6 +1,6 @@
 {
   "name": "grunt-markdown-translate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Grunt plugin for processing translation files and parse any markdown included.",
   "files": [
     "tasks/",
@@ -29,6 +29,6 @@
   "dependencies": {
     "flatnest": "^0.2.2",
     "lodash": "^2.4.1",
-    "node-markup-markdown": "0.0.1"
+    "node-markup-markdown": "^0.1.0"
   }
 }
